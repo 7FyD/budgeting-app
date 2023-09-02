@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* animation for navbar middle buttons */
+
 .popup-animation {
   -webkit-animation: scale-up-center 0.1s cubic-bezier(0.39, 0.575, 0.565, 1)
     both;
@@ -28,3 +30,5 @@
     transform: scale(1);
   }
 }
+
+/* end animation */

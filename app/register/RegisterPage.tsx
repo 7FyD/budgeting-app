@@ -1,0 +1,57 @@
+"use client";
+
+import axios from "axios";
+import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
+import { useCallback, useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import TextInput from "../components/inputs/TextInput";
+
+const RegisterPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FieldValues>({
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
+    axios
+      .post("/api/register", data)
+      .then(() => {
+        toast.success("Registration confirmed!");
+        router.push("/login");
+      })
+      .catch((error) => {
+        toast.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      <TextInput
+        id="email"
+        label="Email"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+    </div>
+  );
+};
+
+export default RegisterPage;

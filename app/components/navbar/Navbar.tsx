@@ -1,30 +1,18 @@
 import Container from "../Container";
 import Logo from "./Logo";
-import NavbarCenterButtons from "./NavbarCenterButtons";
+import NavbarCenterButton from "./CenterDropdown";
+import CenterButtons from "./CenterButtons";
+import AccountMenu from "./AccountMenu";
 
 const Navbar = () => {
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
-      <div
-        className="
-          py-4
-          border-b-[1px]
-        "
-      >
+      <div className="py-4 border-b-[1px]">
         <Container>
-          <div
-            className="
-              flex
-              flex-row
-              items-center
-              justify-between
-              gap-3
-              md:gap-0
-            "
-          >
+          <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
             <Logo />
-            <NavbarCenterButtons />
-            <p>Account</p>
+            <CenterButtons />
+            <AccountMenu />
           </div>
         </Container>
       </div>
