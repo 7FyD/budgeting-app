@@ -7,6 +7,7 @@ import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import TextInput from "../components/inputs/TextInput";
+import Button from "../Button";
 
 const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -49,6 +50,28 @@ const RegisterPage = () => {
         register={register}
         errors={errors}
         required
+      />
+      <TextInput
+        id="name"
+        label="Name"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <TextInput
+        id="password"
+        label="Password"
+        type="password"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Button
+        disabled={false}
+        label="Register"
+        onClick={handleSubmit(onSubmit)}
       />
     </div>
   );

@@ -1,3 +1,5 @@
+import RegisterPage from "../register/RegisterPage";
+
 export default function Login() {
-  return <div></div>;
+  return <RegisterPage />;
 }
