@@ -44,16 +44,16 @@ const RegisterPage = () => {
   return (
     <div className="flex flex-col gap-4">
       <TextInput
-        id="email"
-        label="Email"
+        id="name"
+        label="Name"
         disabled={isLoading}
         register={register}
         errors={errors}
         required
-      />
+      />{" "}
       <TextInput
-        id="name"
-        label="Name"
+        id="email"
+        label="Email"
         disabled={isLoading}
         register={register}
         errors={errors}

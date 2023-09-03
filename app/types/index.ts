@@ -1,11 +1,10 @@
-type User = {
-  id: number; // Adjust the type of 'id' as needed
-  createdAt: Date;
-  updatedAt: Date;
-  email: string | null;
-  name: string | null;
-  hashedPassword: string | null;
-  budgetId: number;
-};
+import { User } from "@prisma/client";
 
-export default User;
+export type SafeUser = Omit<
+  User,
+  "createdAt" | "updatedAt" | "emailVerified"
+> & {
+  createdAt: string;
+  updatedAt: string;
+  emailVerified: string | null;
+};

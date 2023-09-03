@@ -1,5 +1,5 @@
-import RegisterPage from "../register/RegisterPage";
+import LoginPage from "./LoginPage";
 
 export default function Login() {
-  return <RegisterPage />;
+  return <LoginPage />;
 }
