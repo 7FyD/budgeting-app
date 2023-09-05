@@ -1,5 +1,12 @@
 import LoginPage from "./LoginPage";
+import getCurrentUser from "../actions/getCurrentUser";
 
-export default function Login() {
-  return <LoginPage />;
+export default async function Login() {
+  const currentUser = await getCurrentUser();
+  return (
+    <LoginPage
+      currentUser={currentUser}
+      backgroundImageUrl="/images/loginbg.jpg"
+    />
+  );
 }

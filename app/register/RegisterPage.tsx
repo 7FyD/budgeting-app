@@ -7,7 +7,7 @@ import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import TextInput from "../components/inputs/TextInput";
-import Button from "../Button";
+import Button from "../components/Button";
 
 const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);

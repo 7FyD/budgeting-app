@@ -1,8 +1,7 @@
-"use client";
-
 import { useCallback, useState } from "react";
 import MenuItem from "./MenuItem";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface CenterDropdownProps {
   label: string;
@@ -15,11 +14,10 @@ const CenterDropdown: React.FC<CenterDropdownProps> = ({ label, options }) => {
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
-    ``;
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative z-[100]  ">
       <div
         onClick={toggleOpen}
         className="
@@ -44,6 +42,7 @@ const CenterDropdown: React.FC<CenterDropdownProps> = ({ label, options }) => {
         <div
           className={`
             absolute 
+            z-20
             rounded-sm
             shadow-md
             w-[108px]
@@ -54,7 +53,7 @@ const CenterDropdown: React.FC<CenterDropdownProps> = ({ label, options }) => {
             text-center
             md:left-12
             popup-animation
-        `}
+          `}
         >
           <div className="flex flex-col cursor-pointer">
             {options?.map((option: any) => (

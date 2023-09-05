@@ -5,9 +5,27 @@ import { signIn } from "next-auth/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import TextInput from "../components/inputs/TextInput";
-import Button from "../Button";
+import Button from "../components/Button";
+import getCurrentUser from "../actions/getCurrentUser";
 
-const LoginPage = () => {
+import Image from "next/image";
+import Heading from "../components/Heading";
+import { SafeUser } from "../types";
+
+interface LoginPageProps {
+  backgroundImageUrl: string;
+  currentUser?: SafeUser | null;
+}
+
+const LoginPage: React.FC<LoginPageProps> = ({
+  backgroundImageUrl,
+  currentUser,
+}) => {
+  if (currentUser?.id) {
+    return <div>You are already logged in.</div>;
+  }
+
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -21,10 +39,14 @@ const LoginPage = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
+
     signIn("credentials", {
       ...data,
       redirect: false,
     }).then((callback) => {
+      setIsLoading(false);
+
       if (callback?.ok) {
         router.refresh();
         router.push("/"); // change to dashboard after impleneting that
@@ -38,25 +60,71 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <TextInput
-        id="email"
-        label="Email"
-        disabled={false}
-        register={register}
-        errors={errors}
-        required
+    <div
+      className={`
+        justify-center
+        items-center
+        flex
+        overflow-x-hidden
+        overflow-y-auto
+        relative
+        inset-0
+        z-1
+        outline-none
+        focus:outline-none
+        bg-cover
+        bg-center 
+        min-h-[75vh]
+      `}
+    >
+      <Image
+        src={backgroundImageUrl}
+        alt="Background Image"
+        layout="fill"
+        objectFit="cover"
+        objectPosition="center"
+        // You can set other props for the Image component as needed
       />
-      <TextInput
-        id="password"
-        label="Password"
-        type="password"
-        disabled={false}
-        register={register}
-        errors={errors}
-        required
-      />
-      <Button disabled={false} label="Login" onClick={handleSubmit(onSubmit)} />
+      <div
+        className="
+          relative
+          w-full
+          md:w-4/6
+          lg:w-3/6
+          xl:w-2/5
+          my-6
+          mx-auto
+          h-full
+          lg:h-auto
+          md:h-auto
+        "
+      >
+        <Heading title="Welcome back!" center />
+        <div className="flex flex-col gap-4 py-6">
+          <TextInput
+            id="email"
+            label="Email"
+            disabled={false}
+            register={register}
+            errors={errors}
+            required
+          />
+          <TextInput
+            id="password"
+            label="Password"
+            type="password"
+            disabled={false}
+            register={register}
+            errors={errors}
+            required
+          />
+        </div>
+        <Button
+          label="Login"
+          onClick={handleSubmit(onSubmit)}
+          disabled={isLoading}
+        />
+      </div>
     </div>
   );
 };
