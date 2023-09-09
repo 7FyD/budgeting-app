@@ -5,6 +5,7 @@ import { Anek_Bangla } from "next/font/google";
 import Navbar from "./components/navbar/Navbar";
 import ToasterProvider from "./providers/ToasterProvider";
 import getCurrentUser from "./actions/getCurrentUser";
+import { useRequireBudget } from "./hooks/useRequireBudget";
 
 const anek = Anek_Bangla({ subsets: ["latin"] });
 
@@ -20,14 +21,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
-
   return (
     <html lang="en">
       <body className={anek.className}>
         <ToasterProvider />
         <Navbar currentUser={currentUser} />
         <div className="pb-10 pt-[76px]">{children}</div>
-        <div className="text-center">Test</div>
+        <div className="text-center">Future footer</div>
       </body>
     </html>
   );
