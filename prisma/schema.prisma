@@ -12,22 +12,38 @@ datasource db {
 
 model User {
   id              String  @id @default(cuid())
-  name            String?
-  email           String?   @unique
+  name            String? 
+  email           String?   @unique @db.VarChar(50)
   emailVerified   DateTime?
   image           String?
   hashedPassword  String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  budgetId        Int?
+  budgetId        String?
   budget UserBudget?
   
   accounts Account[]
 }
 
+model UserBudget {
+  id              String  @id @default(cuid())
+  monthlyIncome Int
+  rentAndUtilities Int
+  extraExpenses Int
+  extraIncome Int
+  allocatedNeeds Int?
+  allocatedWants Int?
+  allocatedSave Int?
+  userId String @unique
+  user User @relation(fields: [userId], references: [id])
+  
+  categories Category[] 
+
+}
+
 model Account {
-  id                Int @id @default(autoincrement())
+  id                String  @id @default(cuid())
   userId            String @unique
   type              String
   provider          String
@@ -46,28 +62,19 @@ model Account {
 }
 
 
-model UserBudget {
-  id Int @id @default(autoincrement())
-  monthlyIncome Decimal
-  rentAndUtilities Decimal
-  userId String @unique
-  user User @relation(fields: [userId], references: [id])
-  
-  categories Category[] 
 
-}
 
 model Category {
-  id Int @id @default(autoincrement())
+  id String  @id @default(cuid())
   name String
-  userBudgetId Int
+  userBudgetId String
   budget UserBudget @relation(fields: [userBudgetId], references: [id])
   
   expenses Expense[] 
 }
 
 model Expense {
-  id Int @id @default(autoincrement())
+  id String  @id @default(cuid())
   createdAt DateTime @default(now())
   amount Decimal  
   date DateTime?
@@ -75,7 +82,7 @@ model Expense {
 
 
   // Reference the category associated with this expense
-  categoryId Int
+  categoryId String
   category Category @relation(fields: [categoryId], references: [id])
 
 }

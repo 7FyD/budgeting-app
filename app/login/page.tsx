@@ -3,10 +3,5 @@ import getCurrentUser from "../actions/getCurrentUser";
 
 export default async function Login() {
   const currentUser = await getCurrentUser();
-  return (
-    <LoginPage
-      currentUser={currentUser}
-      backgroundImageUrl="/images/loginbg.jpg"
-    />
-  );
+  return <LoginPage currentUser={currentUser} />;
 }

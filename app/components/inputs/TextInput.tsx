@@ -48,8 +48,8 @@ const Input: React.FC<InputProps> = ({
           w-full
           p-4
           pt-6
-          opacity-20
-          font-light 
+          font-light
+          text-black
           bg-white
           border-2
           rounded-full
@@ -77,6 +77,10 @@ const Input: React.FC<InputProps> = ({
           peer-placeholder-shown:translate-y-0 
           peer-focus:scale-75
           peer-focus:-translate-y-4
+          hover:scale-75
+          hover:-translate-y-4
+          peer-hover:scale-75
+          peer-hover:-translate-y-4
           ${errors[id] ? "text-rose-500" : "text-zinc-400"}
         `}
       >

@@ -28,7 +28,7 @@ export const authOptions: AuthOptions = {
         console.log("Received credentials:", credentials);
 
         if (!credentials?.email || !credentials?.password) {
-          console.log("test3");
+          console.log("Input invalid.");
           throw new Error("Invalid credentials");
         }
 
@@ -39,7 +39,7 @@ export const authOptions: AuthOptions = {
         });
 
         if (!user || !user?.hashedPassword) {
-          console.log("te2st");
+          console.log("Account not found.");
           throw new Error("Invalid credentials");
         }
 
@@ -49,7 +49,7 @@ export const authOptions: AuthOptions = {
         );
 
         if (!isCorrectPassword) {
-          console.log("test");
+          console.log("Invalid password.");
           throw new Error("Invalid credentials");
         }
 

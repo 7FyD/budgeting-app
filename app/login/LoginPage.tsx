@@ -13,14 +13,10 @@ import Heading from "../components/Heading";
 import { SafeUser } from "../types";
 
 interface LoginPageProps {
-  backgroundImageUrl: string;
   currentUser?: SafeUser | null;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({
-  backgroundImageUrl,
-  currentUser,
-}) => {
+const LoginPage: React.FC<LoginPageProps> = ({ currentUser }) => {
   if (currentUser?.id) {
     return <div>You are already logged in.</div>;
   }
@@ -77,14 +73,6 @@ const LoginPage: React.FC<LoginPageProps> = ({
         min-h-[75vh]
       `}
     >
-      <Image
-        src={backgroundImageUrl}
-        alt="Background Image"
-        layout="fill"
-        objectFit="cover"
-        objectPosition="center"
-        // You can set other props for the Image component as needed
-      />
       <div
         className="
           relative

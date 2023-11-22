@@ -34,7 +34,9 @@ const RegisterPage = () => {
         router.push("/login");
       })
       .catch((error) => {
-        toast.error(error);
+        toast.error(
+          " Invalid password confirmation. \n If the error persists, please contact support."
+        );
       })
       .finally(() => {
         setIsLoading(false);
@@ -62,6 +64,15 @@ const RegisterPage = () => {
       <TextInput
         id="password"
         label="Password"
+        type="password"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <TextInput
+        id="confirmPassword"
+        label="Confirm Password"
         type="password"
         disabled={isLoading}
         register={register}
