@@ -15,6 +15,7 @@ interface AddInfoPageProps {
 }
 
 const AddInfoPage: React.FC<AddInfoPageProps> = ({ currentUser }) => {
+  if (!currentUser) return <div>Please log in first.</div>;
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const {
@@ -25,8 +26,8 @@ const AddInfoPage: React.FC<AddInfoPageProps> = ({ currentUser }) => {
     defaultValues: {
       monthlyIncome: "",
       rentAndUtilities: "",
-      otherPayments: "0",
-      bonusIncome: "0",
+      extraExpenses: "0",
+      extraIncome: "0",
     },
   });
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -63,13 +64,13 @@ const AddInfoPage: React.FC<AddInfoPageProps> = ({ currentUser }) => {
         errors={errors}
       />
       <TextInput
-        id="otherPayments"
+        id="extraExpenses"
         label="Do you have any other payments or debts such as a car loan or credit card debt?"
         register={register}
         errors={errors}
       />
       <TextInput
-        id="otherIncome"
+        id="extraIncome"
         label="Do you receive any other income, such as performance bonuses or dividend payments?"
         register={register}
         errors={errors}

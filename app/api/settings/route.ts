@@ -4,8 +4,12 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { monthlyIncome, rentAndUtilities /* other budget-related fields */ } =
-    body;
+  let {
+    monthlyIncome,
+    rentAndUtilities,
+    extraExpenses,
+    extraIncome /* other budget-related fields */,
+  } = body;
 
   try {
     // Assuming you have a function to get the current user
@@ -14,14 +18,18 @@ export async function POST(request: Request) {
     if (!currentUser) {
       throw new Error("No user found in the current session.");
     }
-
+    monthlyIncome = parseInt(monthlyIncome);
+    rentAndUtilities = parseInt(rentAndUtilities);
+    extraExpenses = parseInt(extraExpenses);
+    extraIncome = parseInt(extraIncome);
     // Create a new budget for the current user
     const userBudget = await prisma.userBudget.create({
       data: {
         monthlyIncome,
         rentAndUtilities,
+        extraExpenses,
+        extraIncome,
         userId: currentUser.id,
-        // Other budget-related fields
       },
     });
 

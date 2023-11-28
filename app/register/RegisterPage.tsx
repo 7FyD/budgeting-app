@@ -34,9 +34,7 @@ const RegisterPage = () => {
         router.push("/login");
       })
       .catch((error) => {
-        toast.error(
-          " Invalid password confirmation. \n If the error persists, please contact support."
-        );
+        toast.error("Invalid user data, please check your info.");
       })
       .finally(() => {
         setIsLoading(false);

@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   const { email, name, password, confirmPassword } = body;
 
   if (password !== confirmPassword) {
-    throw new Error("Invalid password and confirm password.");
+    throw new Error("Please check your inputted data.");
   }
 
   const hashedPassword = await bcrypt.hash(password, 12);
